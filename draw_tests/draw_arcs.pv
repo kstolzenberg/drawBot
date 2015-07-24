@@ -1,0 +1,28 @@
+# could you acquire random components and assemblem then ramdomly???
+
+#size(1000, 1200)
+color(mode=RGB)
+background(1)
+stroke(0,.5)
+# this doesn't do anything? stroke(random(255),random(255),random(255))
+strokewidth(10)
+pen(cap = ROUND)
+fill(.5, .5)
+
+"""
+beginpath(x=100, y=100)
+arcto(200,123,ccw=False, close=False)
+endpath()
+"""
+
+for x, y in grid(10,10, 100, 100):
+    # grid size is related to the 
+    with bezier(50+x, 50+y) as path:
+        for i in range(3):
+            arcto(random(50,100)+x,random(50,100)+y, ccw=False)
+            #lineto(random(50,100)+x,random(50,100)+y)
+            
+
+
+
+            
