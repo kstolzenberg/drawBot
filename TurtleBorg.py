@@ -1,87 +1,87 @@
 #!/usr/bin/env python
 # coding: Latin-1
-# example from piborg.org
-
-# load libraru functions
+ 
+# Load library functions we want
 import sys
 import time
 import RPi.GPIO as GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
-
-# set the GPIO pins to drive
+ 
+# Set which GPIO pins the drive outputs are connected to
 DRIVE_1 = 4
 DRIVE_2 = 18
 DRIVE_3 = 8
 DRIVE_4 = 7
-
-# set all drive pins as output pins
+ 
+# Set all of the drive pins as output pins
 GPIO.setup(DRIVE_1, GPIO.OUT)
 GPIO.setup(DRIVE_2, GPIO.OUT)
 GPIO.setup(DRIVE_3, GPIO.OUT)
 GPIO.setup(DRIVE_4, GPIO.OUT)
-
-leftDrive = DRIVE_1
-rightDrive = DRIVE_2
-penDrive = DRIVE_3
-
-# functions for the robot
+ 
+# Map of functions to drive pins
+leftDrive = DRIVE_1                     # Drive number for left motor
+rightDrive = DRIVE_4                    # Drive number for right motor
+penDrive = DRIVE_3                      # Drive number for pen solenoid
+ 
+# Functions for the robot to perform
 def MoveForward(n):
-	"""Move forward for 'n' seconds"""
-	GPIO.output(leftDrive, GPIO.HIGH)
-	GPIO.output(rightDrive, GPIO.HIGH)
-	time.sleep(n)
-	GPIO.output(leftDrive, GPIO.LOW)
-	GPIO.output(rightDrive, GPIO.LOW)
-
+    """Move forward for 'n' seconds"""
+    GPIO.output(leftDrive, GPIO.HIGH)
+    GPIO.output(rightDrive, GPIO.HIGH)
+    time.sleep(n)
+    GPIO.output(leftDrive, GPIO.LOW)
+    GPIO.output(rightDrive, GPIO.LOW)
+ 
 def MoveLeft(n):
-	"""Move left for 'n' seconds"""
-	GPIO.output(leftDrive, GPIO.HIGH)
-	GPIO.output(rightDrive, GPIO.LOW)
-	time.sleep(n)
-	GPIO.output(leftDrive, GPIO.LOW)
-
+    """Move left for 'n' seconds"""
+    GPIO.output(leftDrive, GPIO.HIGH)
+    GPIO.output(rightDrive, GPIO.LOW)
+    time.sleep(n)
+    GPIO.output(leftDrive, GPIO.LOW)
+ 
 def MoveRight(n):
-	"""Move right for 'n' seconds"""
-	GPIO.output(leftDrive, GPIO.LOW)
-	GPIO.output(rightDrive, GPIO.HIGH)
-	time.sleep(n)
-	GPIO.output(rightDrive, GPIO.LOW)
-
+    """Move right for 'n' seconds"""
+    GPIO.output(leftDrive, GPIO.LOW)
+    GPIO.output(rightDrive, GPIO.HIGH)
+    time.sleep(n)
+    GPIO.output(rightDrive, GPIO.LOW)
+ 
 def PenUp(n):
-	"""Lift the pen up"""
-	GPIO.output(penDrive, GPIO.LOW)
-
+    """Lift the pen up"""
+    GPIO.output(penDrive, GPIO.LOW)
+ 
 def PenDown(n):
-        """Lift the pen down"""
-        GPIO.output(penDrive, GPIO.HIGH)
-
+    """Place the pen down"""
+    GPIO.output(penDrive, GPIO.HIGH)
+ 
 def HelpMessage(n):
-	"""display a list of avail. commands"""
-	print ''
-	print 'available commands:'
-	commands = dCommands.keys()
-	commands.sort()
-	for command in commands:
-		print '% 10s - %s, %s' % (command, dCommands[command].func_name, dCommands[command].__doc__)
-	print ''
-
-# map command names to functions
+    """Display a list of available commands"""
+    print ''
+    print 'Available commands:'
+    commands = dCommands.keys()
+    commands.sort()
+    for command in commands:
+        print '% 10s - %s, %s' % (command, dCommands[command].func_name, dCommands[command].__doc__)
+    print ''
+ 
+# Map of command names to functions
 dCommands = {
-	'FORWARD':MoveForward,
-	'FD':MoveForward,
-	'LEFT':MoveLeft,
-	'LT':MoveLeft,
-	'RIGHT':MoveRight,
-	'RT':MoveRight,
-	'PENUP':PenUp,
-	'PU':PenUp,
-	'PENDOWN':PenDown,
-	'PD':PenDown,
-	'HELP':HelpMessage,
-	'HELP':HelpMessage
-	}
-
+        'FORWARD':MoveForward,
+        'FD':MoveForward,
+        'LEFT':MoveLeft,
+        'LT':MoveLeft,
+        'RIGHT':MoveRight,
+        'RT':MoveRight,
+        'PENUP':PenUp,
+        'PU':PenUp,
+        'PENDOWN':PenDown,
+        'PD':PenDown,
+        'HELP':HelpMessage,
+        '?':HelpMessage
+        }
+ 
 # If we have been run directly then look at command line
 if __name__ == "__main__":
     # Process command
