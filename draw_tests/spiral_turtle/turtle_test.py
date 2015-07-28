@@ -25,4 +25,6 @@ def spiral (numCirc, radius):
 
 spiral(5, 100)
 
+turtle.backward(400)
+
 turtle.exitonclick()
