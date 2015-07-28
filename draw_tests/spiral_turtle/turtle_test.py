@@ -16,6 +16,7 @@ turtle.right(90)
 
 # basic spirograph! :) notice each time the start position is not changing - only its direction!!
 turtle.pensize(2)
+turtle.pencolor("blue")
 
 def spiral (numCirc, radius):
 	for i in range(numCirc):
