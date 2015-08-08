@@ -2,8 +2,11 @@
 import turtle as t
 
 t.Screen()
-t.screensize(512,512)
+t.screensize(800,800)
 t.speed(10)
+t.ht()
+t.pensize(2)
+
 
 # most basic koch:
 # size = 40
@@ -31,11 +34,17 @@ def kochSnow(order, size):
     if order == 0:
         t.forward(size)
     else:
-        for angle in [-120,60,-120]:
-            for angle in [-120,60,-120]:
-                koch(order-1, size/3)
-                t.left(angle)
+        angle_range = [-120,60,0,60,-120,60]
 
-kochSnow(3,400)
+        for angle in angle_range:
+            kochSnow(order-1, size/3) # hold up you were calling the original func!
+            t.left(angle)
+        return angle_range
+
+
+angles = kochSnow(3,400)
+t.penup()
+t.goto(0,50)
+t.write("angles: %s" % list(angles), True, align="center", font=("Arial", 10, "normal"))
 
 t.mainloop()
