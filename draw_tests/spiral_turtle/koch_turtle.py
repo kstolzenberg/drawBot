@@ -1,4 +1,4 @@
-# http://openbookproject.net/thinkcs/python/english3e/recursion.html
+# original curve from here - then modified by me! http://openbookproject.net/thinkcs/python/english3e/recursion.html
 import turtle as t
 
 t.Screen()
@@ -27,17 +27,14 @@ def koch(order, size):
             koch(order-1, size/3)
             t.left(angle)
 
-# how to modify to get to a snowflake? this isn't there ...
-# this gets half way around?!?!?![-120,60]
-# when you call both - it goes too far!
+# note this isn't a snowflake but other weirdness
 def kochSnow(order, size):
     if order == 0:
         t.forward(size)
     else:
-        angle_range = [-120,60,0,60,-120,60]
-
+        angle_range = [-120,60,0,-120,60,0]
         for angle in angle_range:
-            kochSnow(order-1, size/3) # hold up you were calling the original func!
+            kochSnow(order-1, size/3)
             t.left(angle)
         return angle_range
 
