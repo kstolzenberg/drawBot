@@ -26,15 +26,15 @@ def koch(order, size):
 
 # how to modify to get to a snowflake? this isn't there ...
 # this gets half way around?!?!?![-120,60]
+# when you call both - it goes too far!
 def kochSnow(order, size):
     if order == 0:
         t.forward(size)
     else:
-        for angle in [-120,60]:
-            koch(order-1, size/3)
-            t.left(angle)
-            koch(order-1, size/3)
-            t.left(angle)
+        for angle in [-120,60,-120]:
+            for angle in [-120,60,-120]:
+                koch(order-1, size/3)
+                t.left(angle)
 
 kochSnow(3,400)
 
